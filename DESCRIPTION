@@ -4,7 +4,7 @@ Title: visualize genome-wide association study with gene annotation and
 Version: 0.99.2
 Authors@R: c(person("Hongwei", "Wang", role=c("aut", "cre", "cph"),email="whweve@163.com"))
 Description: IntAssoPlot, an R package, provides improved visual display of GWAS results in a publication-ready format. The main panel of a IntAssoPlot plot contains connecting line link the relative association p-values on the -log10 scale, the genome annotation, and the linkage disequiblism (LD) matrix. Inspection of the output image can provide important biological information including locis that passed the genome-wide significant threshold, genes harbored or located near the significant loci, and the extent of LD within the selected region.
-Depends: R (>= 3.1),SNPRelate,reshape2,ggplot2,gdsfmt,ggrepel,stats
+Depends: R (>= 3.4),SNPRelate,reshape2,ggplot2,gdsfmt,ggrepel,stats
 License: GPL-3 | file LICENSE
 NeedsCompilation: no
 Encoding: UTF-8
