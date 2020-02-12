@@ -13,4 +13,6 @@ RoxygenNote: 7.0.2
 Packaged: 2020-02-11 14:03:25 UTC; Administrator
 Suggests: knitr,rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/whweve/IntAssoPlot
+BugReports: https://github.com/whweve/IntAssoPlot/issues
 biocViews: Genetics, Visualization, SNP
