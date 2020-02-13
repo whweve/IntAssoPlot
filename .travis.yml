@@ -1,8 +1,0 @@
-language: r
-
-warnings_are_errors: true
-
-# systems
-os:
-  - linux
-  - osx
