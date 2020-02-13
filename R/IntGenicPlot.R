@@ -91,7 +91,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             # transcript start and end
             for (struct in c("utr", "cds", "exon")) {
                 assign(paste0("transcript_structure_", struct), transcript_corrdination[grep(struct, 
-                  transcript_corrdination$V3, ignore.case = T), ])
+                  transcript_corrdination$V3, ignore.case = TRUE), ])
                 if (dim(get(paste0("transcript_structure_", struct)))[1] > 0) {
                   assign(paste0("transcript_structure_", struct, "_list"), list(geom_segment(data = get(paste0("transcript_structure_", 
                     struct)), aes(x = V4, xend = V5, y = -max(pvalue_range) * fold/30, 
