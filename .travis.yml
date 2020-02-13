@@ -1,7 +1,6 @@
 language: r
 
 warnings_are_errors: true
-bioc_required: true
 
 # systems
 os:
