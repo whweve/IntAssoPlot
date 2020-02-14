@@ -507,10 +507,10 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             }
             y_axis_text <- ifelse(unique(transcript_corrdination$V7) == "-", list(geom_text(aes(x = transcript_max + 
                 (transcript_max - transcript_min)/6.5, y = mean(pvalue_range) * 
-                fold), label = "atop(-log[10]*italic(P)[observed])", parse = T, 
+                fold), label = "atop(-log[10]*italic(P)[observed])", parse = TRUE, 
                 angle = 90)), list(geom_text(aes(x = transcript_min - (transcript_max - 
                 transcript_min)/6.5, y = mean(pvalue_range) * fold), label = "atop(-log[10]*italic(P)[observed])", 
-                parse = T, angle = 90)))
+                parse = TRUE, angle = 90)))
             if (isTRUE(triangleLD)) {
                 xtext <- list(geom_text(aes(x = (transcript_max + transcript_min)/2, 
                   y = min(poly_data$y) - 10 * distance, label = transcript)))
