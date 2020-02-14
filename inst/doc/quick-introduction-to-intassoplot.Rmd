@@ -1,0 +1,120 @@
+---
+title: "quick-introduction-to-IntAssoPlot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{quick-introduction-to-IntAssoPlot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 7, fig.height = 7, fig.align = "center")
+library(IntAssoPlot)
+```
+
+This vignette documents usage of IntAssoPlot. IntAssoPlot was designed to plot the association, gene struture, and LD matrix in one single plot. As you read this document, you will see the input data format and the basic usage of IntAssoPlot.
+
+## 1. input data format
+### 1.1 association data format
+ A dataset containing the association file. The variables are as follows: Marker (molecular marker name), Locus (the chromosome of the marker), Site (the position of the marke), p (p value of the marker)
+ Here's a quick demo of association data format:
+
+```{r}
+head(association)
+#the attribute of each column could be viewed as:
+str(association$Marker)
+str(association$Locus)
+str(association$Site)
+str(association$p)
+```
+
+### 1.2 gene structure data format
+A dataset containing the annotation file, usually a gtf file, WITHOUT the column name. The annotation file could be read with header=FALSE. Here's a quick demo of association data format:
+```{r}
+head(gtf)
+#the attribute of each column could be viewed as:
+str(gtf$V1)
+str(gtf$V2)
+str(gtf$V3)
+str(gtf$V4)
+str(gtf$V5)
+str(gtf$V6)
+str(gtf$V7)
+str(gtf$V8)
+str(gtf$V9)
+```
+
+### 1.3 genotype data format
+A dataset containing the genotype file, usually a hapmap file, with the column name. Here's a quick demo of association data format:
+```{r}
+#only 20 column of the genotype markers are shown.
+head(zmvpp1_hapmap[,1:20])
+```
+
+## 2. plot the association with annotation and LD matrix
+Here, we present an example to show the usage of IntAssoPlot, using a previouly published data (Wang, et al., 2016)
+
+### 2.1 Regional integrative plot with one set of genotype markers
+plot the association results at a region spaning a 400 kbp region, and plot the LD matrix using SNP markerers that are same as that for association mapping.
+```{r}
+IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2)
+```
+
+### 2.2 plot the LD values with colours ranging from light gray to dark gray.
+```{r}
+IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2,colour02 = "gray1",colour04 = "gray21",colour06 = "gray41",colour08 = "gray61",colour10 = "gray81",)
+```
+
+### 2.3 plot the LD values with colours ranging from white to red.
+```{r}
+#get five colors ranging from white to red
+pal <- colorRampPalette(c("white", "red"))
+IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2,colour02 = pal(5)[1],colour04 = pal(5)[2],colour06 = pal(5)[3],colour08 = pal(5)[4],colour10 = pal(5)[5])
+```
+
+### 2.4 plot the LD values with colours ranging from white to red and label the gene name.
+```{r}
+#get five colors ranging from white to red
+pal <- colorRampPalette(c("white", "red"))
+IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2,colour02 = pal(5)[1],colour04 = pal(5)[2],colour06 = pal(5)[3],colour08 = pal(5)[4],colour10 = pal(5)[5],label_gene_name = TRUE)
+```
+
+### 2.5 Regional integrative plot with two set of genotype markers
+plot the association results at a regional spaning a 200 kbp region, and plot the LD matrix using SNP markerers that differed from that for association mapping. This feature allows reserchers investigate the LD structure at a more wide range of markers.
+```{r}
+IntRegionalPlot(chr=9,left=94178074-100000,right=94178074+100000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap2,threshold=5,leadsnp_size=2)
+```
+
+### 2.6 a relative small regional integrative plot with one set of genotype markers
+plot the association results at a regional covering the candidate gene, and plot the LD matrix using SNP markerers that are the same from that for association mapping.
+```{r}
+IntRegionalPlot(chr=9,left=94178074-2000,right=94178074+5000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2)
+```
+
+### 2.7 a single gene level plot
+plot the association results at a given gene, and plot the LD matrix using SNP markerers that are the same from that for association mapping. Also specified markers are highlighted by various shape and colour.
+
+#### 2.7.1 a basic plot
+```{r}
+IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,leadsnpLD = FALSE)
+```
+
+#### 2.7.2 extand region from up/down-stream of gene
+```{r}
+IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE)
+```
+
+#### 2.7.3 highlight selected marker, with colour and shape speicified in a dataframe: marker2highlight
+```{r}
+IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,marker2highlight=marker2highlight)
+```
+
+#### 2.7.4 add linking line
+```{r}
+IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,marker2highlight=marker2highlight,link2gene=marker2link,link2LD=marker2link)
+```
+
+#### 2.7.5 add names for highlighted marker
+```{r}
+IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,marker2highlight=marker2highlight,link2gene=marker2link,link2LD=marker2link,marker2label=marker2link,marker2label_angle=60,marker2label_size=2)
+```
