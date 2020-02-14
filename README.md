@@ -30,11 +30,11 @@ BiocManager::install(c("SNPRelate","gdsfmt"))
 ```
 ## install IntAssoPlot from Github:
 ```R
-library(remotes) # version 2.0.1
+library(remotes) # version 2.1.0
 #download, build, and install IntAssoPlot without creating vignette
 install_github("whweve/IntAssoPlot")
 #download, build, and install IntAssoPlot with creating vignette
-install_github("whweve/IntAssoPlot",build=TRUE,build_opts = c("--no-resave-data", "--no-manual"))
+install_github("whweve/IntAssoPlot",build=TRUE,build_vignettes = TRUE)
 ```
 
 # example
