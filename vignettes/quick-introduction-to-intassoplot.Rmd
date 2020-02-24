@@ -14,10 +14,11 @@ library(IntAssoPlot)
 
 This vignette documents usage of IntAssoPlot. IntAssoPlot was designed to plot the association, gene struture, and LD matrix in one single plot. As you read this document, you will see the input data format and the basic usage of IntAssoPlot.
 
-## 1. input data format
-### 1.1 association data format
- A dataset containing the association file. The variables are as follows: Marker (molecular marker name), Locus (the chromosome of the marker), Site (the position of the marke), p (p value of the marker)
- Here's a quick demo of association data format:
+## 1. Data formats used in IntAssoPlot
+To give a quickly introduction to IntAssoPlot, we listed datasets previously published. Below, we give detailed information for each data required.
+### 1.1 association analysis data format
+ A dataset containing the association analysis file. Currently, we plot the -log10 transformed p values, which can be derived from genome scan, against the physical position of the corresponding marker. Thus, a dataframe, containing marker name and its p value, is required. The required variables are as follows: Marker (molecular marker name), Locus (the chromosome of the marker), Site (the position of the marke), p (p value of the marker)
+Here's a quick demo of association data format:
 
 ```{r}
 head(association)
