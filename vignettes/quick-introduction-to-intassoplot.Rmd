@@ -14,9 +14,38 @@ library(IntAssoPlot)
 
 This vignette documents usage of IntAssoPlot. IntAssoPlot was designed to plot the association, gene struture, and LD matrix in one single plot. As you read this document, you will see the input data format and the basic usage of IntAssoPlot.
 
-## 1. Data formats used in IntAssoPlot
+##1. Installation
+###1.1. install compiler
+The install_github(), in the R package remotes, requires that you build from source, thus make and compilers must be installed on your system -- see the R FAQ for your operating system; you may also need to install dependencies manually.
+
+For Windows system, rtools, a compiler, is required and can be found at https://cran.r-project.org/bin/windows/Rtools/.
+
+For Ubuntu/Linux system, compilers could be installed by the command: sudo apt-get install libcurl4-openssl-dev libssl-dev. For more information, please see https://stackoverflow.com/questions/20923209/problems-installing-the-devtools-package.
+
+###1.2. install R package devtools and remotes
+
+install.packages(c("devtools","remotes"))
+install depended packages, including ggplot2, SNPRelate, ggrepel, gdsfmt and reshape2
+#ggplot2, ggrepel, and reshape2 are installed from CRAN
+install.packages(c("ggplot2","ggrepel","reshape2"))
+#SNPRelate and gdsfmt are installed from Bioconductor
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(c("SNPRelate","gdsfmt"))
+
+###1.3. install IntAssoPlot from Github:
+library(remotes) # version 2.1.0
+#download, build, and install IntAssoPlot without creating vignette
+install_github("whweve/IntAssoPlot")
+#download, build, and install IntAssoPlot with creating vignette
+install_github("whweve/IntAssoPlot",build=TRUE,build_vignettes = TRUE)
+
+###1.4 example
+see example("IntGenicPlot") or example("IntRegionalPlot")
+
+## 2. Data formats used in IntAssoPlot
 To give a quickly introduction to IntAssoPlot, we listed datasets previously published (Chia et al., 2013; Li et al., 2013; Wang et al., 2016). Below, we give detailed information for each data required.
-### 1.1 association analysis data format
+### 2.1 association analysis data format
 A dataset containing the association analysis file. Currently, we plot the -log10 transformed p values, which can be derived from genome scan, against the physical position of the corresponding marker. Thus, a dataframe, containing marker name and its p value, is required. The required variables are as follows: Marker (molecular marker name), Locus (the chromosome of the marker), Site (the position of the marke), p (p value of the marker)
 Here's a quick demo of association data format:
 
@@ -29,7 +58,7 @@ str(association$Site)
 str(association$p)
 ```
 
-### 1.2 gene structure data format
+### 2.2 gene structure data format
 A dataset containing the annotation file, usually a gtf file, WITHOUT the column name. When a genome of one species is sequenced, the gtf file can be found at genome annotation website. For the released genomes, please refer to www.ensembl.org.
 Because most of the gtf files are lack of colnames, the annotation file could be read in using read.table("where is your file",header=FALSE). Here's a quick demo of gtf data format:
 ```{r}
@@ -46,7 +75,7 @@ str(gtf$V8)
 str(gtf$V9)
 ```
 
-### 1.3 genotype data format
+### 2.3 genotype data format
 A dataset containing the genotype file, usually a hapmap file, with the column name. Hapmap is a frequently used format to store the genotyoe information. One can high-throughput sequence important materials, align the sequences to the reference genome, extract SNPs/InDels. On the other hand, one can resequence one specific gene. To perform this, design overlapped amplication primers, amplify genomic or transcriptomic fragments, multi-align the sequence, extract SNPs/InDels.
 Here's a quick demo of association data format:
 ```{r}
@@ -54,70 +83,70 @@ Here's a quick demo of association data format:
 head(zmvpp1_hapmap[,1:20])
 ```
 
-## 2. plot the association with annotation and LD matrix
+## 3. plot the association with annotation and LD matrix
 IntAssoPlot is to automatically integrate the results of association analysis, gene structure and LD matrix into one single view. In fact, this task is difficult, because the scatter diagram plot - log10P against the physical location of SNPs, while the LD matrix has no physical location. Our work is actually to solve the above problem. Here, we present an example to show the usage of IntAssoPlot, using a previouly published data (Wang, et al., 2016).
 
-### 2.1 Regional integrative plot with one set of genotype markers
+### 3.1 Regional integrative plot with one set of genotype markers
 plot the association results at a region spaning a 400 kbp region, and plot the LD matrix using SNP markerers that are same as that for association mapping.
 ```{r}
 IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2)
 ```
 
-### 2.2 plot the LD values with colours ranging from light gray to dark gray.
+### 3.2 plot the LD values with colours ranging from light gray to dark gray.
 ```{r}
 IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2,colour02 = "gray1",colour04 = "gray21",colour06 = "gray41",colour08 = "gray61",colour10 = "gray81",)
 ```
 
-### 2.3 plot the LD values with colours ranging from white to red.
+### 3.3 plot the LD values with colours ranging from white to red.
 ```{r}
 #get five colors ranging from white to red
 pal <- colorRampPalette(c("white", "red"))
 IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2,colour02 = pal(5)[1],colour04 = pal(5)[2],colour06 = pal(5)[3],colour08 = pal(5)[4],colour10 = pal(5)[5])
 ```
 
-### 2.4 plot the LD values with colours ranging from white to red and label the gene name.
+### 3.4 plot the LD values with colours ranging from white to red and label the gene name.
 ```{r}
 #get five colors ranging from white to red
 pal <- colorRampPalette(c("white", "red"))
 IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2,colour02 = pal(5)[1],colour04 = pal(5)[2],colour06 = pal(5)[3],colour08 = pal(5)[4],colour10 = pal(5)[5],label_gene_name = TRUE)
 ```
 
-### 2.5 Regional integrative plot with two set of genotype markers
+### 3.5 Regional integrative plot with two set of genotype markers
 plot the association results at a regional spaning a 200 kbp region, and plot the LD matrix using SNP markerers that differed from that for association mapping. This feature allows reserchers investigate the LD structure at a more wide range of markers.
 ```{r}
 IntRegionalPlot(chr=9,left=94178074-100000,right=94178074+100000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap2,threshold=5,leadsnp_size=2)
 ```
 
-### 2.6 a relative small regional integrative plot with one set of genotype markers
+### 3.6 a relative small regional integrative plot with one set of genotype markers
 plot the association results at a regional covering the candidate gene, and plot the LD matrix using SNP markerers that are the same from that for association mapping.
 ```{r}
 IntRegionalPlot(chr=9,left=94178074-2000,right=94178074+5000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2)
 ```
 
-### 2.7 a single gene level plot
+### 3.7 a single gene level plot
 plot the association results at a given gene, and plot the LD matrix using SNP markerers that are the same from that for association mapping. Also specified markers are highlighted by various shape and colour.
 
-#### 2.7.1 a basic plot
+#### 3.7.1 a basic plot
 ```{r}
 IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,leadsnpLD = FALSE)
 ```
 
-#### 2.7.2 extand region from up/down-stream of gene
+#### 3.7.2 extand region from up/down-stream of gene
 ```{r}
 IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE)
 ```
 
-#### 2.7.3 highlight selected marker, with colour and shape speicified in a dataframe: marker2highlight
+#### 3.7.3 highlight selected marker, with colour and shape speicified in a dataframe: marker2highlight
 ```{r}
 IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,marker2highlight=marker2highlight)
 ```
 
-#### 2.7.4 add linking line
+#### 3.7.4 add linking line
 ```{r}
 IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,marker2highlight=marker2highlight,link2gene=marker2link,link2LD=marker2link)
 ```
 
-#### 2.7.5 add names for highlighted marker
+#### 3.7.5 add names for highlighted marker
 ```{r}
 IntGenicPlot('GRMZM2G170927_T01',gtf,association=zmvpp1_association,hapmap=zmvpp1_hapmap,hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,marker2highlight=marker2highlight,link2gene=marker2link,link2LD=marker2link,marker2label=marker2link,marker2label_angle=60,marker2label_size=2)
 ```
