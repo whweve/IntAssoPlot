@@ -15,9 +15,9 @@ library(IntAssoPlot)
 This vignette documents usage of IntAssoPlot. IntAssoPlot was designed to plot the association, gene struture, and LD matrix in one single plot. As you read this document, you will see the input data format and the basic usage of IntAssoPlot.
 
 ## 1. Data formats used in IntAssoPlot
-To give a quickly introduction to IntAssoPlot, we listed datasets previously published. Below, we give detailed information for each data required.
+To give a quickly introduction to IntAssoPlot, we listed datasets previously published (Chia et al., 2013; Li et al., 2013; Wang et al., 2016). Below, we give detailed information for each data required.
 ### 1.1 association analysis data format
- A dataset containing the association analysis file. Currently, we plot the -log10 transformed p values, which can be derived from genome scan, against the physical position of the corresponding marker. Thus, a dataframe, containing marker name and its p value, is required. The required variables are as follows: Marker (molecular marker name), Locus (the chromosome of the marker), Site (the position of the marke), p (p value of the marker)
+A dataset containing the association analysis file. Currently, we plot the -log10 transformed p values, which can be derived from genome scan, against the physical position of the corresponding marker. Thus, a dataframe, containing marker name and its p value, is required. The required variables are as follows: Marker (molecular marker name), Locus (the chromosome of the marker), Site (the position of the marke), p (p value of the marker)
 Here's a quick demo of association data format:
 
 ```{r}
@@ -30,7 +30,8 @@ str(association$p)
 ```
 
 ### 1.2 gene structure data format
-A dataset containing the annotation file, usually a gtf file, WITHOUT the column name. The annotation file could be read with header=FALSE. Here's a quick demo of association data format:
+A dataset containing the annotation file, usually a gtf file, WITHOUT the column name. When a genome of one species is sequenced, the gtf file can be found at genome annotation website. For the released genomes, please refer to www.ensembl.org.
+Because most of the gtf files are lack of colnames, the annotation file could be read in using read.table("where is your file",header=FALSE). Here's a quick demo of gtf data format:
 ```{r}
 head(gtf)
 #the attribute of each column could be viewed as:
