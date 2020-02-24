@@ -47,14 +47,15 @@ str(gtf$V9)
 ```
 
 ### 1.3 genotype data format
-A dataset containing the genotype file, usually a hapmap file, with the column name. Here's a quick demo of association data format:
+A dataset containing the genotype file, usually a hapmap file, with the column name. Hapmap is a frequently used format to store the genotyoe information. One can high-throughput sequence important materials, align the sequences to the reference genome, extract SNPs/InDels. On the other hand, one can resequence one specific gene. To perform this, design overlapped amplication primers, amplify genomic or transcriptomic fragments, multi-align the sequence, extract SNPs/InDels.
+Here's a quick demo of association data format:
 ```{r}
 #only 20 column of the genotype markers are shown.
 head(zmvpp1_hapmap[,1:20])
 ```
 
 ## 2. plot the association with annotation and LD matrix
-Here, we present an example to show the usage of IntAssoPlot, using a previouly published data (Wang, et al., 2016)
+IntAssoPlot is to automatically integrate the results of association analysis, gene structure and LD matrix into one single view. In fact, this task is difficult, because the scatter diagram plot - log10P against the physical location of SNPs, while the LD matrix has no physical location. Our work is actually to solve the above problem. Here, we present an example to show the usage of IntAssoPlot, using a previouly published data (Wang, et al., 2016).
 
 ### 2.1 Regional integrative plot with one set of genotype markers
 plot the association results at a region spaning a 400 kbp region, and plot the LD matrix using SNP markerers that are same as that for association mapping.
