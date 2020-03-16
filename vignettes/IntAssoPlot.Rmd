@@ -48,6 +48,7 @@ see example("IntGenicPlot") or example("IntRegionalPlot")
 
 ## 2. Data formats used in IntAssoPlot
 To give a quickly introduction to IntAssoPlot, we listed datasets previously published (Chia et al., 2013; Li et al., 2013; Wang et al., 2016). Below, we give detailed information for each data required.
+
 ### 2.1 association analysis data format
 A dataset containing the association analysis file. Currently, we plot the -log10 transformed p values, which can be derived from genome scan, against the physical position of the corresponding marker. Thus, a dataframe, containing marker name and its p value, is required. The required variables are as follows: Marker (molecular marker name), Locus (the chromosome of the marker), Site (the position of the marke), p (p value of the marker)
 Here's a quick demo of association data format:
