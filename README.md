@@ -1,4 +1,4 @@
-IntAssoPlot: visualize genome-wide association study with gene annotation and linkage disequiblism
+IntAssoPlot: Visualize Genome-Wide Association Study with Gene Annotation and Linkage Disequiblism
 ====
 
 ![GPLv3](http://www.gnu.org/graphics/gplv3-88x31.png)
