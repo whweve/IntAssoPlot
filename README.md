@@ -43,5 +43,8 @@ BiocManager::install("IntAssoPlot")
 ```
 
 # example
+```R
+library(IntAssoPlot)
+example("IntGenicPlot")
+example("IntRegionalPlot")
 ```
-see example("IntGenicPlot") or example("IntRegionalPlot")
