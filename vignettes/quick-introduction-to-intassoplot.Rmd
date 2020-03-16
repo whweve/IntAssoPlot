@@ -2,7 +2,7 @@
 title: "Quick introduction to IntAssoPlot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{quick-introduction-to-IntAssoPlot}
+  %\VignetteIndexEntry{Quick introduction to IntAssoPlot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
