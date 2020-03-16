@@ -1,5 +1,5 @@
 ---
-title: "quick-introduction-to-IntAssoPlot"
+title: "Quick introduction to IntAssoPlot"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{quick-introduction-to-IntAssoPlot}
