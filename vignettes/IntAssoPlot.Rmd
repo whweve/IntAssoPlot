@@ -93,7 +93,6 @@ IntAssoPlot is to automatically integrate the results of association analysis, g
 ### 3.1 Regional integrative plot with one set of genotype markers
 plot the association results at a region spaning a 400 kbp region, and plot the LD matrix using SNP markerers that are same as that for association mapping.
 ```{r}
-figs(name="LenFreq1","Length frequency of Ruffe captured in 1992.")
 IntRegionalPlot(chr=9,left=94178074-200000,right=94178074+200000,gtf=gtf,association=association,hapmap=hapmap_am368,hapmap_ld=hapmap_am368,threshold=5,leadsnp_size=2)
 ```
 
