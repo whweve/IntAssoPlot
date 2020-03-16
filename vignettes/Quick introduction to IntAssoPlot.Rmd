@@ -14,7 +14,7 @@ library(IntAssoPlot)
 
 This vignette documents usage of IntAssoPlot. IntAssoPlot was designed to plot the association, gene struture, and LD matrix in one single plot. As you read this document, you will see the input data format and the basic usage of IntAssoPlot.
 
-##1. Installation
+##1. Introduction
 ###1.1. install compiler
 The install_github(), in the R package remotes, requires that you build from source, thus make and compilers must be installed on your system -- see the R FAQ for your operating system; you may also need to install dependencies manually.
 
@@ -40,7 +40,10 @@ install_github("whweve/IntAssoPlot")
 #download, build, and install IntAssoPlot with creating vignette
 install_github("whweve/IntAssoPlot",build=TRUE,build_vignettes = TRUE)
 
-###1.4 example
+#1.4 install IntAssoPlot from BioConductor
+BiocManager::install("IntAssoPlot")
+
+###1.5 example
 see example("IntGenicPlot") or example("IntRegionalPlot")
 
 ## 2. Data formats used in IntAssoPlot
