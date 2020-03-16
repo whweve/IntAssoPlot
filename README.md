@@ -44,7 +44,10 @@ BiocManager::install("IntAssoPlot")
 
 # example
 ```R
+#load IntAssoPlot
 library(IntAssoPlot)
+# an example of association plot at a gene level
 example("IntGenicPlot")
+# an example of association plot at a region level
 example("IntRegionalPlot")
 ```
