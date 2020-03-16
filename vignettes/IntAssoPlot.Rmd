@@ -1,8 +1,8 @@
 ---
-title: "Quick introduction to IntAssoPlot"
+title: "Tutorials for the R/Bioconductor Package IntAssoPlot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Quick introduction to IntAssoPlot}
+  %\VignetteIndexEntry{IntAssoPlot Tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
