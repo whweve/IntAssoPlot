@@ -42,11 +42,8 @@ install_github("whweve/IntAssoPlot")
 #download, build, and install IntAssoPlot with creating vignette
 install_github("whweve/IntAssoPlot",build=TRUE,build_vignettes = TRUE)
 ```
-###1.4 install IntAssoPlot from BioConductor
-```{r}
-BiocManager::install("IntAssoPlot")
-```
-###1.5 example
+
+###1.4 example
 see example("IntGenicPlot") or example("IntRegionalPlot")
 
 ## 2. Data formats used in IntAssoPlot
