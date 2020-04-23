@@ -14,15 +14,15 @@ library(IntAssoPlot)
 
 This vignette documents usage of IntAssoPlot. IntAssoPlot was designed to plot the association, gene struture, and LD matrix in one single plot. As you read this document, you will see the input data format and the basic usage of IntAssoPlot.
 
-##1. Introduction
-###1.1. install compiler
+## 1. Introduction
+### 1.1. install compiler
 The install_github(), in the R package remotes, requires that you build from source, thus make and compilers must be installed on your system -- see the R FAQ for your operating system; you may also need to install dependencies manually.
 
 For Windows system, rtools, a compiler, is required and can be found at https://cran.r-project.org/bin/windows/Rtools/.
 
 For Ubuntu/Linux system, compilers could be installed by the command: sudo apt-get install libcurl4-openssl-dev libssl-dev. For more information, please see https://stackoverflow.com/questions/20923209/problems-installing-the-devtools-package.
 
-###1.2. install R package devtools and remotes
+### 1.2. install R package devtools and remotes
 
 install.packages(c("devtools","remotes"))
 #install depended packages, including ggplot2, SNPRelate, ggrepel, gdsfmt and reshape2
@@ -34,7 +34,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install(c("SNPRelate","gdsfmt"))
 
 
-###1.3. install IntAssoPlot from Github:
+### 1.3. install IntAssoPlot from Github:
 
 library(remotes) # version 2.1.0
 #download, build, and install IntAssoPlot without creating vignette
@@ -43,7 +43,7 @@ install_github("whweve/IntAssoPlot")
 install_github("whweve/IntAssoPlot",build=TRUE,build_vignettes = TRUE)
 
 
-###1.4 example
+### 1.4 example
 see example("IntGenicPlot") or example("IntRegionalPlot")
 
 ## 2. Data formats used in IntAssoPlot
