@@ -71,7 +71,8 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
         n_pvalue_range <- length(pvalue_range)
         # marker_number = dim(transcript_association)[1] length =
         # (transcript_max-transcript_min) distance = 0.5*length/(marker_number-1)
-        gene_list <- gtf[gtf$V1 == chr & gtf$V2 == "protein_coding", ]
+        #gene_list <- gtf[gtf$V1 == chr & gtf$V2 == "protein_coding", ]
+        gene_list <- gtf[gtf$V1 == chr & grepl("exon",gtf$V2,ignore.case = TRUE),]
         gene_list$V9 <- gsub("\"|;", "", gene_list$V9)
         gene_list$V9 <- sub("gene_id (\\S+) .+", "\\1", gene_list$V9)
         gene_list_start <- aggregate(V4 ~ V9, data = gene_list, FUN = min)
