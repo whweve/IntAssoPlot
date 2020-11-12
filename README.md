@@ -28,7 +28,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("SNPRelate","gdsfmt"))
 ```
-## install IntAssoPlot from Github:
+## install IntAssoPlot from GitHub:
 ```R
 library(remotes) # version 2.1.0
 #download, build, and install IntAssoPlot without creating vignette
