@@ -37,11 +37,6 @@ install_github("whweve/IntAssoPlot")
 install_github("whweve/IntAssoPlot",build=TRUE,build_vignettes = TRUE)
 ```
 
-## install IntAssoPlot from BioConductor:
-```R
-BiocManager::install("IntAssoPlot")
-```
-
 # example
 ```R
 #load IntAssoPlot
