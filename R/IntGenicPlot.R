@@ -76,8 +76,8 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             transcript_min & chromosome_association$Site <= transcript_max, ]
         transcript_association <- transcript_association[order(transcript_association$Site), 
             ]
-        if (dim(transcript_association)[1] == 0) {
-            stop("no association observed")
+        if (dim(transcript_association)[1] < 2) {
+            stop("Less than 2 markers, can not compute LD.")
         } else {
             # compute the meta variable
             pvalue_range <- pretty(-log10(transcript_association$p))
