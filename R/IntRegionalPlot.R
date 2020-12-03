@@ -59,7 +59,7 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
     transcript_association <- transcript_association[order(transcript_association$Site), 
         ]
     if (dim(transcript_association)[1] < 2) {
-        stop("Less than 2 markers, can not compute LD.")
+        stop("Less than 2 markers, can not compute LD")
     } else {
         R2 <- Site <- Site2 <- V4 <- V5 <- V9 <- group <- p <- NULL
         x <- xend <- y <- yend <- aggregate <- NULL
