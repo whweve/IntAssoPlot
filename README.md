@@ -49,4 +49,5 @@ example("IntRegionalPlot")
 
 # Citation
 *If IntAssoPlot is used in your work, you may cite IntAssoPlot.
+
 Fengyu, He, Shuangcheng, Ding, Hongwei, Wang and Feng, Qin. IntAssoPlot: An R Package for Integrated Visualization of Genome-Wide Association Study Results With Gene Structure and Linkage Disequilibrium Matrix. Frontiers in Genetics 2020. doi: 10.3389/fgene.2020.00260.
