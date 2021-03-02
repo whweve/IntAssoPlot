@@ -52,6 +52,6 @@ example("IntRegionalPlot")
 
 ```R
 #get the citation in R enviroment
-citation("IntRegionalPlot")
+citation("IntAssoPlot")
 ```
 Fengyu He, Shuangcheng Ding, Hongwei Wang and Feng Qin. IntAssoPlot: An R Package for Integrated Visualization of Genome-Wide Association Study Results With Gene Structure and Linkage Disequilibrium Matrix. Frontiers in Genetics, 2020, 11:260. doi: 10.3389/fgene.2020.00260.
