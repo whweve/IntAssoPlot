@@ -1,7 +1,7 @@
 #' @title plot association with LD and annotation at a given region
 #' @description  This function plot the association with
 #' linkage disequiblism and annotation at the level of a region.
-#' @author Hongwei Wang <\email{whweve@163.com}>
+#' @author Hongwei Wang <\email{whweve@163.com;wanghw@yangtzeu.edu.cn}>
 #' @param chr the chromosome, required.
 #' @param left the left border of the region, required.
 #' @param right the right border of the region, required.
