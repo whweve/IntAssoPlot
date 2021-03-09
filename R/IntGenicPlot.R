@@ -1,7 +1,7 @@
 #' @title plot association with LD and annotation at a given gene
 #' @description  This function plot the association with
 #' linkage disequiblism and annotation at the level of a single gene.
-#' @author Hongwei Wang <\email{whweve@163.com}>
+#' @author Hongwei Wang <\email{whweve@163.com;wanghw@yangtzeu.edu.cn}>
 #' @param transcript the transcript of gene, required.
 #' @param gtf the annotation file, required.
 #' @param association the association table, required.
