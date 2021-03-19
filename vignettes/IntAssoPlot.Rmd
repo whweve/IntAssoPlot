@@ -1,5 +1,5 @@
 ---
-title: "Tutorials for the R/Bioconductor Package IntAssoPlot"
+title: "Tutorials for the R Package IntAssoPlot"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{IntAssoPlot Tutorial}
