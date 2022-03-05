@@ -32,6 +32,8 @@
 #' @param marker2label a dataframe speicify markers to be labeled, default NULL. Please see help('marker2link')
 #' @param marker2label_angle angel of labeled text, default 60.
 #' @param marker2label_size size of labeled text, default 1.
+#' @param thresholdlinecolour colour of threshold line, default gray.
+#' @param upperpointsize size of point of association sites, default 1.
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -49,7 +51,7 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
     colour02 = "gray", colour04 = "cyan", colour06 = "green", colour08 = "yellow", 
     colour10 = "red", leadsnp_shape = 23, leadsnp_colour = "black", leadsnp_fill = "purple", 
     leadsnp_size = 1.5, marker2highlight = NULL, marker2label = NULL, marker2label_angle = 60, 
-    marker2label_size = 1) {
+    marker2label_size = 1,colour="gray",upperpointsize=1) {
     chromosome_association <- association[association$Locus == chr, ]
     # transcript_corrdination <- gtf[grepl(transcript,gtf$V9),]
     transcript_min <- left
@@ -158,7 +160,7 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
         if (all(length(threshold) > 0, threshold <= max(pvalue_range))) {
             threshold_line <- list(geom_segment(aes(x = transcript_min, xend = transcript_max, 
                 y = threshold * fold, yend = threshold * fold), linetype = "longdash", 
-                colour = "gray"))
+                colour = thresholdlinecolour))
         }
         if (all(length(threshold) > 0, threshold > max(pvalue_range))) {
             threshold_line <- list(NULL)
@@ -576,7 +578,7 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
         
         plot <- ggplot() + threshold_line + link_asso_gene + link_LD_genic_structure + 
             geom_point(data = transcript_association, aes(Site, -log10(p) * fold), 
-                shape = 21, colour = "black", fill = "black") + ld_leadsnp_colour + 
+                shape = 21, colour = "black", fill = "black",size=upperpointsize) + ld_leadsnp_colour + 
             gene_box + bottom_trianglLD + gene_for_seg_name + gene_rev_seg_name + 
             gene_for_seg + gene_rev_seg + scale_x + scale_y_line + scale_y_ticks + 
             scale_y_text + y_axis_text + xtext + leadsnp2highlight_list + marker2highlight_list + 
