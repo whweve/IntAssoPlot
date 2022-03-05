@@ -35,6 +35,8 @@
 #' @param marker2label a dataframe speicify markers to be labeled, default NULL. Please see help('marker2link')
 #' @param marker2label_angle angel of labeled text, default 60.
 #' @param marker2label_size size of labeled text, default 1.
+#' @param thresholdlinecolour colour of threshold line, default gray.
+#' @param upperpointsize size of point of association sites, default 1.
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -55,7 +57,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
     colour02 = "gray", colour04 = "cyan", colour06 = "green", colour08 = "yellow", 
     colour10 = "red", leadsnp_shape = 23, leadsnp_colour = "black", leadsnp_fill = "purple", 
     leadsnp_size = 1.5, marker2highlight = NULL, marker2label = NULL, marker2label_angle = 60, 
-    marker2label_size = 1) {
+    marker2label_size = 1,thresholdlinecolour="gray,upperpointsize=1) {
     if (sum(grepl(transcript, gtf$V9)) == 0) {
         stop("please provide the correct transcript or the gtf file")
     } else {
@@ -138,7 +140,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             if (all(length(threshold) > 0, threshold <= max(pvalue_range))) {
                 threshold_line <- list(geom_segment(aes(x = transcript_min, xend = transcript_max, 
                   y = threshold * fold, yend = threshold * fold), linetype = "longdash", 
-                  colour = "gray"))
+                  colour = thresholdlinecolour))
             }
             if (all(length(threshold) > 0, threshold > max(pvalue_range))) {
                 threshold_line <- list(NULL)
@@ -559,7 +561,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                   marker2highlight$rs), ]
             }
             plot <- ggplot() + geom_point(data = transcript_association, aes(Site, 
-                -log10(p) * fold), colour = "black") + ld_leadsnp_colour + transcript_intron_structure + 
+                -log10(p) * fold), colour = "black",size=upperpointsize) + ld_leadsnp_colour + transcript_intron_structure + 
                 transcript_structure_exon_list + transcript_structure_utr_list + 
                 transcript_structure_cds_list + link_asso_gene + link_LD_genic_structure + 
                 scale_x + scale_y_line + scale_y_ticks + scale_y_text + threshold_line + 
