@@ -51,7 +51,7 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
     colour02 = "gray", colour04 = "cyan", colour06 = "green", colour08 = "yellow", 
     colour10 = "red", leadsnp_shape = 23, leadsnp_colour = "black", leadsnp_fill = "purple", 
     leadsnp_size = 1.5, marker2highlight = NULL, marker2label = NULL, marker2label_angle = 60, 
-    marker2label_size = 1,colour="gray",upperpointsize=1) {
+    marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1) {
     chromosome_association <- association[association$Locus == chr, ]
     # transcript_corrdination <- gtf[grepl(transcript,gtf$V9),]
     transcript_min <- left
