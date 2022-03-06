@@ -37,9 +37,6 @@
 #' @param marker2label_size size of labeled text, default 1.
 #' @param thresholdlinecolour colour of threshold line, default gray.
 #' @param upperpointsize size of point of association sites, default 1.
-#' @param y_axis_text_size size of text of y axis, default 1.
-#' @param scale_y_text_size size of text of y axis ticks labels, default 1.
-#' @param xtextsize size of text of x axis labels, default 1.
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -60,7 +57,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
     colour02 = "gray", colour04 = "cyan", colour06 = "green", colour08 = "yellow", 
     colour10 = "red", leadsnp_shape = 23, leadsnp_colour = "black", leadsnp_fill = "purple", 
     leadsnp_size = 1.5, marker2highlight = NULL, marker2label = NULL, marker2label_angle = 60, 
-    marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1,y_axis_text_size=1,scale_y_text_size=1,xtextsize=1) {
+    marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1) {
     if (sum(grepl(transcript, gtf$V9)) == 0) {
         stop("please provide the correct transcript or the gtf file")
     } else {
@@ -513,15 +510,15 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             y_axis_text <- ifelse(unique(transcript_corrdination$V7) == "-", list(geom_text(aes(x = transcript_max + 
                 (transcript_max - transcript_min)/6.5, y = mean(pvalue_range) * 
                 fold), label = "atop(-log[10]*italic(P)[observed])", parse = TRUE, 
-                angle = 90,size=y_axis_text_size)), list(geom_text(aes(x = transcript_min - (transcript_max - 
+                angle = 90)), list(geom_text(aes(x = transcript_min - (transcript_max - 
                 transcript_min)/6.5, y = mean(pvalue_range) * fold), label = "atop(-log[10]*italic(P)[observed])", 
-                parse = TRUE, angle = 90,size=y_axis_text_size)))
+                parse = TRUE, angle = 90)))
             if (isTRUE(triangleLD)) {
                 xtext <- list(geom_text(aes(x = (transcript_max + transcript_min)/2, 
-                  y = min(poly_data$y) - 10 * distance, label = transcript,size=xtextsize)))
+                  y = min(poly_data$y) - 10 * distance, label = transcript)))
             } else {
                 xtext <- list(geom_text(aes(x = (transcript_max + transcript_min)/2, 
-                  y = -(transcript_max - transcript_min)/10, label = transcript,size=xtextsize)))
+                  y = -(transcript_max - transcript_min)/10, label = transcript)))
             }
             # add shape for the points of leadsnp
             leadsnp2highlight <- transcript_association[transcript_association$Marker == 
