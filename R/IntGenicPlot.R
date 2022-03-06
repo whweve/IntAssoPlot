@@ -252,7 +252,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                       leadsnp), ]
                   }
                   ld_leadsnp_colour <- list(geom_point(data = ld_leadsnp, aes(Site2, 
-                    -log10(p) * fold, fill = R2), shape = 21, colour = "black"), 
+                    -log10(p) * fold, fill = R2), shape = 21, colour = "black"，size=upperpointsize), 
                     scale_fill_manual(values = c(`0.2` = colour02, `0.4` = colour04, 
                       `0.6` = colour06, `0.8` = colour08, `1` = colour10), labels = c("0-0.2", 
                       "0.2-0.4", "0.4-0.6", "0.6-0.8", "0.8-1.0"), name = lengend_name))
@@ -561,7 +561,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                   marker2highlight$rs), ]
             }
             plot <- ggplot() + geom_point(data = transcript_association, aes(Site, 
-                -log10(p) * fold), colour = "black",size=upperpointsize) + ld_leadsnp_colour + transcript_intron_structure + 
+                -log10(p) * fold), colour = "black") + ld_leadsnp_colour + transcript_intron_structure + 
                 transcript_structure_exon_list + transcript_structure_utr_list + 
                 transcript_structure_cds_list + link_asso_gene + link_LD_genic_structure + 
                 scale_x + scale_y_line + scale_y_ticks + scale_y_text + threshold_line + 
