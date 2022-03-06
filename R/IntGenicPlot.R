@@ -38,6 +38,7 @@
 #' @param thresholdlinecolour colour of threshold line, default gray.
 #' @param upperpointsize size of point of association sites, default 1.
 #' @param y_axis_text_size size of text of y axis, default 1.
+#' @param scale_y_text_size size of text of y axis ticks labels, default 1.
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -58,7 +59,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
     colour02 = "gray", colour04 = "cyan", colour06 = "green", colour08 = "yellow", 
     colour10 = "red", leadsnp_shape = 23, leadsnp_colour = "black", leadsnp_fill = "purple", 
     leadsnp_size = 1.5, marker2highlight = NULL, marker2label = NULL, marker2label_angle = 60, 
-    marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1,y_axis_text_size=1) {
+    marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1,y_axis_text_size=1,scale_y_text_size=1) {
     if (sum(grepl(transcript, gtf$V9)) == 0) {
         stop("please provide the correct transcript or the gtf file")
     } else {
@@ -131,7 +132,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                     n_pvalue_range), yend = pvalue_range * fold))))
             scale_y_text <- ifelse(unique(transcript_corrdination$V7) == "-", list(geom_text(aes(x = rep((transcript_max - 
                 transcript_min)/12 + transcript_max, n_pvalue_range), y = pvalue_range * 
-                fold, label = pvalue_range))), list(geom_text(aes(x = rep(transcript_min - 
+                fold, label = pvalue_range,size=scale_y_text_size))), list(geom_text(size=scale_y_text_size,aes(x = rep(transcript_min - 
                 (transcript_max - transcript_min)/12, n_pvalue_range), y = pvalue_range * 
                 fold, label = pvalue_range))))
             # add threshold line
