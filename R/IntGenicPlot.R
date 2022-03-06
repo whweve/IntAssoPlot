@@ -561,7 +561,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                   marker2highlight$rs), ]
             }
             plot <- ggplot() + geom_point(data = transcript_association, aes(Site, 
-                -log10(p) * fold), colour = "black") + ld_leadsnp_colour + transcript_intron_structure + 
+                -log10(p) * fold), colour = "black",size=upperpointsize) + ld_leadsnp_colour + transcript_intron_structure + 
                 transcript_structure_exon_list + transcript_structure_utr_list + 
                 transcript_structure_cds_list + link_asso_gene + link_LD_genic_structure + 
                 scale_x + scale_y_line + scale_y_ticks + scale_y_text + threshold_line + 
