@@ -128,9 +128,9 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                   transcript_min)/15, n_pvalue_range), y = pvalue_range * fold, 
                   xend = rep(transcript_min - (transcript_max - transcript_min)/30, 
                     n_pvalue_range), yend = pvalue_range * fold))))
-            scale_y_text <- ifelse(unique(transcript_corrdination$V7) == "-", list(geom_text(size=scale_y_text_size,aes(x = rep((transcript_max - 
+            scale_y_text <- ifelse(unique(transcript_corrdination$V7) == "-", list(geom_text(aes(x = rep((transcript_max - 
                 transcript_min)/12 + transcript_max, n_pvalue_range), y = pvalue_range * 
-                fold, label = pvalue_range))), list(geom_text(size=scale_y_text_size,aes(x = rep(transcript_min - 
+                fold, label = pvalue_range))), list(geom_text(aes(x = rep(transcript_min - 
                 (transcript_max - transcript_min)/12, n_pvalue_range), y = pvalue_range * 
                 fold, label = pvalue_range))))
             # add threshold line
