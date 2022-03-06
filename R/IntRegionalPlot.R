@@ -269,7 +269,7 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
                 ld_leadsnp$R2[ld_leadsnp$R2 == "0"] = "0.2"
                 ld_leadsnp$R2[ld_leadsnp$R2 == "1.2"] = "1"
                 ld_leadsnp_colour <- list(geom_point(data = ld_leadsnp, aes(Site2, 
-                  -log10(p) * fold, fill = R2), shape = 21, colour = "black"), 
+                  -log10(p) * fold, fill = R2), shape = 21, colour = "black",size=upperpointsize), 
                   scale_fill_manual(values = c(`0.2` = colour02, `0.4` = colour04, 
                     `0.6` = colour06, `0.8` = colour08, `1` = colour10), labels = c("0-0.2", 
                     "0.2-0.4", "0.4-0.6", "0.6-0.8", "0.8-1.0"), name = lengend_name))
