@@ -82,7 +82,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             stop("Less than 2 markers, can not compute LD.")
         } else {
             # compute the meta variable
-            pvalue_range <- pretty(-log10(transcript_association$p))
+            pvalue_range <- pretty(c(0,-log10(transcript_association$p)))
             # adjust the yaxis to fit in the LD plot
             fold <- ((transcript_max - transcript_min) * 2/3)/max(pvalue_range)
             n_pvalue_range <- length(pvalue_range)
