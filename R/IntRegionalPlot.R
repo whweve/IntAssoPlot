@@ -52,13 +52,6 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
     colour10 = "red", leadsnp_shape = 23, leadsnp_colour = "black", leadsnp_fill = "purple", 
     leadsnp_size = 1.5, marker2highlight = NULL, marker2label = NULL, marker2label_angle = 60, 
     marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1) {
-    chromosome_association <- association[association$Locus == chr, ]
-    # transcript_corrdination <- gtf[grepl(transcript,gtf$V9),]
-    transcript_min <- left
-    transcript_max <- right
-    transcript_association <- chromosome_association[chromosome_association$Site >= 
-        transcript_min & chromosome_association$Site <= transcript_max, ]
-    transcript_association <- transcript_association[order(transcript_association$Site), ]
     
     if (names(association) %in% c("Marker", "Locus",  "Site",   "p") %>% sum() != 4 ) {
       colpos <- which(!(c("Marker", "Locus",  "Site",   "p") %in% names(association)))
@@ -86,6 +79,14 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
     if( asso$Marker %in% hapmap$rs %>% sum() ==0 ) {
       print("There are no identical marker names within association file and the hapmap file. This may lead to error")
     }
+    
+    chromosome_association <- association[association$Locus == chr, ]
+    # transcript_corrdination <- gtf[grepl(transcript,gtf$V9),]
+    transcript_min <- left
+    transcript_max <- right
+    transcript_association <- chromosome_association[chromosome_association$Site >= 
+        transcript_min & chromosome_association$Site <= transcript_max, ]
+    transcript_association <- transcript_association[order(transcript_association$Site), ]
     
     if (dim(transcript_association)[1] < 2) {
         stop("Less than 2 markers, can not compute LD")
