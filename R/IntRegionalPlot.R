@@ -58,8 +58,35 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
     transcript_max <- right
     transcript_association <- chromosome_association[chromosome_association$Site >= 
         transcript_min & chromosome_association$Site <= transcript_max, ]
-    transcript_association <- transcript_association[order(transcript_association$Site), 
-        ]
+    transcript_association <- transcript_association[order(transcript_association$Site), ]
+    
+    if (names(association) %in% c("Marker", "Locus",  "Site",   "p") %>% sum() != 4 ) {
+      colpos <- which(!(c("Marker", "Locus",  "Site",   "p") %in% names(association)))
+      print(paste0("Required column ",c("Marker", "Locus",  "Site",   "p")[colpos]," not existed, this may lead to error. See IntAssoPlot::association for help"))
+    } 
+    if (names(association) %in% c("Marker", "Locus",  "Site",   "p") %>% sum() == 4 ) {
+      print("checking association table. Done")
+    }
+    
+    if (grepl("gene_id (\\S+) .+",gtf$V9) %>% sum() >=1) {
+      print("checking gtf table. Done")
+    } 
+    if (grepl("gene_id (\\S+) .+",gtf$V9) %>% sum() == 0) {
+      print("No text like 'gene_id xxxxx' appeared in the ninth column of gtf. This may lead to error. Rebuild the gtf file from gff file using gffread. See IntAssoPlot::gtf for help")
+    }
+    
+    if(names(hapmap)[1] != "rs") {
+    print("Converting the first column name to rs")
+    names(hapmap)[1] = "rs"
+    }
+    if(sum(asso$Marker %in% hapmap$rs) >= 1) {
+      print("There are identical marker names within association file and the hapmap file. Done")
+    }
+    
+    if( asso$Marker %in% hapmap$rs %>% sum() ==0 ) {
+      print("There are no identical marker names within association file and the hapmap file. This may lead to error")
+    }
+    
     if (dim(transcript_association)[1] < 2) {
         stop("Less than 2 markers, can not compute LD")
     } else {
