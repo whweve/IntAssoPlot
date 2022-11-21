@@ -72,11 +72,11 @@ IntRegionalPlot <- function(chr, left, right, gtf, association, hapmap, hapmap_l
     print("Converting the first column name to rs")
     names(hapmap)[1] = "rs"
     }
-    if(sum(asso$Marker %in% hapmap$rs) >= 1) {
+    if(sum(association$Marker %in% hapmap$rs) >= 1) {
       print("There are identical marker names within association file and the hapmap file. Done")
     }
     
-    if( asso$Marker %in% hapmap$rs %>% sum() ==0 ) {
+    if(association$Marker %in% hapmap$rs %>% sum() ==0 ) {
       print("There are no identical marker names within association file and the hapmap file. This may lead to error")
     }
     
