@@ -37,6 +37,7 @@
 #' @param marker2label_size size of labeled text, default 1.
 #' @param thresholdlinecolour colour of threshold line, default gray.
 #' @param upperpointsize size of point of association sites, default 1.
+#' @param utrsize size of utr, default 4.
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -57,7 +58,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                          colour02 = "gray", colour04 = "cyan", colour06 = "green", colour08 = "yellow", 
                          colour10 = "red", leadsnp_shape = 23, leadsnp_colour = "black", leadsnp_fill = "purple", 
                          leadsnp_size = 1.5, marker2highlight = NULL, marker2label = NULL, marker2label_angle = 60, 
-                         marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1) {
+                         marker2label_size = 1,thresholdlinecolour="gray",upperpointsize=1,utrsize=4) {
   if (sum(grepl(transcript, gtf$V9)) == 0) {
     stop("please provide the correct transcript or the gtf file")
   } else {
@@ -127,6 +128,19 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                                                                                                        struct)), aes(x = V4, xend = V5, y = -max(pvalue_range) * fold/30, 
                                                                                                                      yend = -max(pvalue_range) * fold/30), colour = get(paste0(struct, 
                                                                                                                                                                                "_colour")), size = 4)))
+        } else {
+          assign(paste0("transcript_structure_", struct, "_list"), NULL)
+        }
+      }
+      #control the utr size
+      for (struct in c("utr")) {
+        assign(paste0("transcript_structure_", struct), transcript_corrdination[grep(struct, 
+                                                                                     transcript_corrdination$V3, ignore.case = TRUE), ])
+        if (dim(get(paste0("transcript_structure_", struct)))[1] > 0) {
+          assign(paste0("transcript_structure_", struct, "_list"), list(geom_segment(data = get(paste0("transcript_structure_", 
+                                                                                                       struct)), aes(x = V4, xend = V5, y = -max(pvalue_range) * fold/30, 
+                                                                                                                     yend = -max(pvalue_range) * fold/30), colour = get(paste0(struct, 
+                                                                                                                                                                               "_colour")), size = utrsize)))
         } else {
           assign(paste0("transcript_structure_", struct, "_list"), NULL)
         }
