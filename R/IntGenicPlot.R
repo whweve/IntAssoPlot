@@ -121,7 +121,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
       distance = 0.5 * length/(marker_number - 1)
       
       # transcript start and end
-      for (struct in c("cds", "exon")) {
+      for (struct in c("cds")) {
         assign(paste0("transcript_structure_", struct), transcript_corrdination[grep(struct, 
                                                                                      transcript_corrdination$V3, ignore.case = TRUE), ])
         if (dim(get(paste0("transcript_structure_", struct)))[1] > 0) {
@@ -134,7 +134,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
         }
       }
       #add exon size control, some part of exon may be utr
-      for (struct in c("cds", "exon")) {
+      for (struct in c("exon")) {
         assign(paste0("transcript_structure_", struct), transcript_corrdination[grep(struct, 
                                                                                      transcript_corrdination$V3, ignore.case = TRUE), ])
         if (dim(get(paste0("transcript_structure_", struct)))[1] > 0) {
