@@ -248,11 +248,11 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
         gene_snp2 <- gene_snp[, 12:dim(gene_snp)[2]]
         gene_snp2 <- as.matrix(sapply(gene_snp2, as.numeric))
         
-        snpgdsCreateGeno("test.gds", genmat = gene_snp2, sample.id = names(gene_snp)[12:dim(gene_snp)[2]], 
+        snpgdsCreateGeno(paste0(transcript,"test.gds"), genmat = gene_snp2, sample.id = names(gene_snp)[12:dim(gene_snp)[2]], 
                          snp.id = gene_snp$rs, snp.position = gene_snp$pos, snp.allele = gene_snp$alleles, 
                          snpfirstdim = TRUE)
         
-        genofile <- snpgdsOpen("test.gds")
+        genofile <- snpgdsOpen(paste0(transcript,"test.gds"))
         if (ldstatistics == "rsquare") {
           aa = snpgdsLDMat(genofile, slide = slide_length, method = "corr", 
                            num.thread = threadN)
@@ -355,10 +355,10 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
           }
           gene_snp2 <- gene_snp[, 12:dim(gene_snp)[2]]
           gene_snp2 <- as.matrix(sapply(gene_snp2, as.numeric))
-          snpgdsCreateGeno("test.gds", genmat = gene_snp2, sample.id = names(gene_snp)[12:dim(gene_snp)[2]], 
+          snpgdsCreateGeno(paste0(transcript,"test.gds"), genmat = gene_snp2, sample.id = names(gene_snp)[12:dim(gene_snp)[2]], 
                            snp.id = gene_snp$rs, snp.position = gene_snp$pos, snp.allele = gene_snp$alleles, 
                            snpfirstdim = TRUE)
-          genofile <- snpgdsOpen("test.gds")
+          genofile <- snpgdsOpen(paste0(transcript,"test.gds"))
           if (ldstatistics == "rsquare") {
             aa = snpgdsLDMat(genofile, slide = slide_length, method = "corr", 
                              num.thread = threadN)
@@ -616,6 +616,8 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
         transcript_association = transcript_association[!(transcript_association$Marker %in% 
                                                             marker2highlight$rs), ]
       }
+      #remove the test.gds
+      file.remove(paste0(transcript,"test.gds"))
       plot <- ggplot() + geom_point(data = transcript_association, aes(Site, 
                                                                        -log10(p) * fold), colour = "black",size=upperpointsize) + ld_leadsnp_colour + transcript_intron_structure + 
         transcript_structure_exon_list + transcript_structure_utr_list + 
