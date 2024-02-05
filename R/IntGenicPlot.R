@@ -39,6 +39,7 @@
 #' @param upperpointsize size of point of association sites, default 1.
 #' @param utrsize size of utr, default 4.
 #' @param exonsize size of exon, default 4.
+#' @param linkinglinecolor the color for the linking line, default gray
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -52,7 +53,7 @@
 #' hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,
 #' marker2highlight=marker2highlight,link2gene=marker2link,link2LD=marker2link,
 #' marker2label=marker2link,marker2label_angle=60,marker2label_size=2)
-IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL, 
+IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,linkinglinecolor="gray,
                          slide_length = -1, threadN = 1, up = NULL, down = NULL, threshold = NULL, ldstatistics = "rsquare", 
                          leadsnp = NULL, link2gene = NULL, triangleLD = TRUE, link2LD = NULL, leadsnpLD = TRUE, 
                          exon_colour = "gray", cds_colour = "black", utr_colour = "gray", intron_colour = "gray", 
@@ -478,7 +479,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
           link_asso_gene <- list(geom_segment(data = link_association_structure, 
                                               aes(x = Site, xend = Site, y = rep(-max(pvalue_range) * fold/30, 
                                                                                  link_number), yend = -log10(p) * fold), linetype = "longdash", 
-                                              colour = "red"))
+                                              colour = linkinglinecolor))
         }
       }
       if (is.null(link2gene) & is.null(threshold)) {
@@ -504,7 +505,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
           link_asso_gene <- list(geom_segment(data = link_association_structure, 
                                               aes(x = Site, xend = Site, y = rep(-max(pvalue_range) * fold/30, 
                                                                                  link_number), yend = -log10(p) * fold), linetype = "longdash", 
-                                              colour = "red"))
+                                              colour = linkinglinecolor))
         }
       }
       # add linking line to link gene structure and LD matrix
@@ -518,7 +519,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
           link_asso_gene <- list(geom_segment(data = link_association_structure, 
                                               aes(x = Site, xend = Site, y = rep(-max(pvalue_range) * fold/30, 
                                                                                  link_number), yend = -log10(p) * fold), linetype = "longdash", 
-                                              colour = "red"))
+                                              colour = linkinglinecolor))
           marker_axis_LD_x <- transcript_min + (seq(1:marker_number) - 
                                                   1) * 2 * distance
           marker_axis_genic_x <- hapmap_ld$pos
@@ -529,7 +530,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
           link_ld_data <- link_ld_data[link_ld_data$xend %in% link_association_structure$Site, 
           ]
           link_LD_genic_structure <- geom_segment(data = link_ld_data, 
-                                                  aes(x = x, xend = xend, y = y, yend = yend), colour = "red", 
+                                                  aes(x = x, xend = xend, y = y, yend = yend), colour = linkinglinecolor, 
                                                   linetype = "longdash")
         }
         if (!is.null(link2gene) & !is.null(link2LD)) {
@@ -539,7 +540,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
           link_asso_gene <- list(geom_segment(data = link_association_structure, 
                                               aes(x = Site, xend = Site, y = rep(-max(pvalue_range) * fold/30, 
                                                                                  link_number), yend = -log10(p) * fold), linetype = "longdash", 
-                                              colour = "red"))
+                                              colour = linkinglinecolor))
           marker_axis_LD_x <- transcript_min + (seq(1:marker_number) - 
                                                   1) * 2 * distance
           marker_axis_genic_x <- hapmap_ld$pos
@@ -550,7 +551,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
           link_ld_data <- link_ld_data[link_ld_data$xend %in% link_association_structure$Site, 
           ]
           link_LD_genic_structure <- geom_segment(data = link_ld_data, 
-                                                  aes(x = x, xend = xend, y = y, yend = yend), colour = "red", 
+                                                  aes(x = x, xend = xend, y = y, yend = yend), colour = linkinglinecolor, 
                                                   linetype = "longdash")
         }
       }
