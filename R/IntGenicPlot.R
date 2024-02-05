@@ -53,7 +53,7 @@
 #' hapmap_ld = zmvpp1_hapmap,threshold=8,up=500,down=600,leadsnpLD = FALSE,
 #' marker2highlight=marker2highlight,link2gene=marker2link,link2LD=marker2link,
 #' marker2label=marker2link,marker2label_angle=60,marker2label_size=2)
-IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,linkinglinecolor="gray,
+IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,linkinglinecolor="gray",
                          slide_length = -1, threadN = 1, up = NULL, down = NULL, threshold = NULL, ldstatistics = "rsquare", 
                          leadsnp = NULL, link2gene = NULL, triangleLD = TRUE, link2LD = NULL, leadsnpLD = TRUE, 
                          exon_colour = "gray", cds_colour = "black", utr_colour = "gray", intron_colour = "gray", 
