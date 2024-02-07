@@ -699,7 +699,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             if (isTRUE(triangleLD)) {
                 xtext <- list(geom_text(aes(
                     x = (transcript_max + transcript_min) / 2,
-                    y = min(poly_data$y) - 10 * distance, label = transcript
+                    y = min(poly_data$y) - 5 * distance, label = transcript
                 )))
             } else {
                 xtext <- list(geom_text(aes(
