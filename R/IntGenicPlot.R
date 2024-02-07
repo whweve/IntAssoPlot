@@ -40,6 +40,7 @@
 #' @param utrsize size of utr, default 4.
 #' @param exonsize size of exon, default 4.
 #' @param linkinglinecolor the color for the linking line, default gray
+#' @param ldpointcolour the color for the point of ld, default tranparent
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -55,7 +56,7 @@
 #'     marker2highlight = marker2highlight, link2gene = marker2link, link2LD = marker2link,
 #'     marker2label = marker2link, marker2label_angle = 60, marker2label_size = 2
 #' )
-IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL, linkinglinecolor = "gray",
+IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL, linkinglinecolor = "gray",ldpointcolour="transparent",
                          slide_length = -1, threadN = 1, up = NULL, down = NULL, threshold = NULL, ldstatistics = "rsquare",
                          leadsnp = NULL, link2gene = NULL, triangleLD = TRUE, link2LD = NULL, leadsnpLD = TRUE,
                          exon_colour = "gray", cds_colour = "black", utr_colour = "gray", intron_colour = "gray",
@@ -544,7 +545,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                             geom_polygon(data = poly_data, aes(
                                 group = group,
                                 x = x, y = y - (transcript_max - transcript_min) / 50, fill = R2
-                            )),
+                            ),colour=ldpointcolour),
                             scale_fill_manual(values = c(
                                 `0.2` = colour02, `0.4` = colour04,
                                 `0.6` = colour06, `0.8` = colour08, `1` = colour10
@@ -558,7 +559,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                         bottom_trianglLD <- list(geom_polygon(data = poly_data, aes(
                             group = group,
                             x = x, y = y - (transcript_max - transcript_min) / 50, fill = R2
-                        )))
+                        ),colour=ldpointcolour))
                     }
                 }
                 if (!isTRUE(triangleLD)) {
