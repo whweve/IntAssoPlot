@@ -41,6 +41,7 @@
 #' @param exonsize size of exon, default 4.
 #' @param linkinglinecolor the color for the linking line, default gray
 #' @param ldpointcolour the color for the point of ld, default tranparent
+#' @param reldis2ldmat the relative distance between x axis text and the ld matrix, default 10
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -56,7 +57,8 @@
 #'     marker2highlight = marker2highlight, link2gene = marker2link, link2LD = marker2link,
 #'     marker2label = marker2link, marker2label_angle = 60, marker2label_size = 2
 #' )
-IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL, linkinglinecolor = "gray",ldpointcolour="transparent",
+IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL, linkinglinecolor = "gray",
+                         ldpointcolour="transparent",reldis2ldmat=10,
                          slide_length = -1, threadN = 1, up = NULL, down = NULL, threshold = NULL, ldstatistics = "rsquare",
                          leadsnp = NULL, link2gene = NULL, triangleLD = TRUE, link2LD = NULL, leadsnpLD = TRUE,
                          exon_colour = "gray", cds_colour = "black", utr_colour = "gray", intron_colour = "gray",
@@ -699,7 +701,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             if (isTRUE(triangleLD)) {
                 xtext <- list(geom_text(aes(
                     x = (transcript_max + transcript_min) / 2,
-                    y = min(poly_data$y) - 5 * distance, label = transcript
+                    y = min(poly_data$y) - reldis2ldmat * distance, label = transcript
                 )))
             } else {
                 xtext <- list(geom_text(aes(
