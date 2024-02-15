@@ -636,7 +636,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                     marker_axis_LD_x <- transcript_min + (seq(1:marker_number) -
                         1) * 2 * distance
                     marker_axis_genic_x <- hapmap_ld$pos
-                    marker_axis_LD_y <- rep(-5 * max(pvalue_range) * fold / rellinedis2ldmat, marker_number)
+                    marker_axis_LD_y <- rep(-5 * max(pvalue_range) * fold / 30, marker_number)
                     marker_axis_genic_y <- rep(-max(pvalue_range) * fold / rellinedis2ldmat, marker_number)
                     link_ld_data <- data.frame(
                         x = marker_axis_LD_x, xend = marker_axis_genic_x,
@@ -664,7 +664,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                     marker_axis_LD_x <- transcript_min + (seq(1:marker_number) -
                         1) * 2 * distance
                     marker_axis_genic_x <- hapmap_ld$pos
-                    marker_axis_LD_y <- rep(-4.5 * max(pvalue_range) * fold / rellinedis2ldmat, marker_number)
+                    marker_axis_LD_y <- rep(-4.5 * max(pvalue_range) * fold / 30, marker_number)
                     marker_axis_genic_y <- rep(-max(pvalue_range) * fold / rellinedis2ldmat, marker_number)
                     link_ld_data <- data.frame(
                         x = marker_axis_LD_x, xend = marker_axis_genic_x,
