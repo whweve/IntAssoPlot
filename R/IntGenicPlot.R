@@ -767,6 +767,8 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             # remove the test.gds
             file.remove(paste0(transcript, "test.gds"))
             plot <- ggplot() +
+                link_asso_gene +
+                link_LD_genic_structure +
                 geom_point(data = transcript_association, aes(
                     Site,
                     -log10(p) * fold
@@ -776,8 +778,6 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                 transcript_structure_exon_list +
                 transcript_structure_utr_list +
                 transcript_structure_cds_list +
-                link_asso_gene +
-                link_LD_genic_structure +
                 scale_x +
                 scale_y_line +
                 scale_y_ticks +
