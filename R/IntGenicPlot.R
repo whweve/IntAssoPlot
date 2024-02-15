@@ -713,7 +713,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
             leadsnp2highlight <- transcript_association[transcript_association$Marker ==
                 leadsnp, ]
            if(leadsnp_size <= upperpointsize) {
-             leadsnp_size = upperpointsize
+             leadsnp_size = upperpointsize+1
              }
             leadsnp2highlight_list <- list(geom_point(
                 data = leadsnp2highlight,
