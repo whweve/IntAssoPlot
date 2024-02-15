@@ -42,6 +42,7 @@
 #' @param linkinglinecolor the color for the linking line, default gray
 #' @param ldpointcolour the color for the point of ld, default tranparent
 #' @param reldis2ldmat the relative distance between x axis text and the ld matrix, default 10
+#' @param rellinedis2ldmat the relative distance between x axis schemem and the ld matrix, defualt 30
 #' @return ggplot2 plot
 #' @export
 #' @import ggplot2 SNPRelate reshape2 gdsfmt ggrepel
@@ -58,7 +59,7 @@
 #'     marker2label = marker2link, marker2label_angle = 60, marker2label_size = 2
 #' )
 IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL, linkinglinecolor = "gray",
-                         ldpointcolour="transparent",reldis2ldmat=10,
+                         ldpointcolour="transparent",reldis2ldmat=10,rellinedis2ldmat=30,
                          slide_length = -1, threadN = 1, up = NULL, down = NULL, threshold = NULL, ldstatistics = "rsquare",
                          leadsnp = NULL, link2gene = NULL, triangleLD = TRUE, link2LD = NULL, leadsnpLD = TRUE,
                          exon_colour = "gray", cds_colour = "black", utr_colour = "gray", intron_colour = "gray",
@@ -503,7 +504,7 @@ IntGenicPlot <- function(transcript, gtf, association, hapmap, hapmap_ld = NULL,
                             right_center_x, lower_center_x, left_center_x
                         ) + transcript_min,
                         y = c(upper_center_y, right_center_y, lower_center_y, left_center_y) -
-                            4 * max(pvalue_range) * fold / 30, label = rep(c(1, 2, 3, 4),
+                            4 * max(pvalue_range) * fold / rellinedis2ldmat, label = rep(c(1, 2, 3, 4),
                             each = length(upper_center_x)
                         )
                     )
